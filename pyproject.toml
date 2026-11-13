@@ -1,0 +1,50 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "bwa-xai"
+version = "0.1.0"
+description = "Bootstrap Wasserstein Alignment: stable feature attribution and an explainability evaluation toolkit for low-data regimes"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "Mujahidul Islam" }, { name = "Priya Dubey" }]
+keywords = ["explainable-ai", "feature-attribution", "optimal-transport", "bootstrap", "wasserstein-barycenter"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Intended Audience :: Science/Research",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+dependencies = [
+    "numpy>=1.24",
+    "scipy>=1.10",
+    "scikit-learn>=1.3",
+    "POT>=0.9",
+]
+
+[project.urls]
+Repository = "https://github.com/mujahidmahfuz/bwa-xai"
+Paper = "https://doi.org/10.1016/j.knosys.2026.117182"
+
+[project.optional-dependencies]
+shap = ["shap>=0.44"]
+dev = ["pytest>=7.4", "pytest-cov>=4.1"]
+
+[project.scripts]
+bwa-bench = "bwa_xai.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+markers = ["network: needs to download a dataset from OpenML"]
+
+[tool.coverage.run]
+source = ["bwa_xai"]
+
+[tool.coverage.report]
+fail_under = 80
+show_missing = true
